@@ -2,10 +2,9 @@ import React, { useState } from "react";
 
 import Logo from "../../olx-logo.png";
 import "./Signup.css";
-// import { FirebaseContext } from '../../store/FirebaseContext';
 import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
-import { firestore } from "../../firebase/config";
-import { collection, addDoc } from "firebase/firestore";
+import firebase from "../../firebase/config";
+import { collection, addDoc, getFirestore } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 
 export default function Signup() {
@@ -19,7 +18,8 @@ export default function Signup() {
   // console.log(firebase,'firrrrrrrrrrrrrrrrrrr');
   const handleSubmit = (e) => {
     e.preventDefault();
-    const auth = getAuth();
+    const auth = getAuth(firebase); 
+    const firestore = getFirestore(firebase)
     // Create a new user
     createUserWithEmailAndPassword(auth, email, password)
     .then(

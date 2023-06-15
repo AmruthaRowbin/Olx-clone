@@ -6,15 +6,15 @@ import Login from './Components/Login/Login'
 import Create from './Components/Create/Create'
 
 import Home from './Pages/Home';
+import firebase from './firebase/config';
 import { AuthContext } from './store/Context';
 import { getAuth } from 'firebase/auth';
-import { firestore} from './firebase/config'
-import { getDocs,collection,query,where } from 'firebase/firestore';
+import { getDocs,collection,query,where, getFirestore } from 'firebase/firestore';
 
 function App() {
   const {setUser} = useContext(AuthContext)
-  const auth = getAuth()
-
+  const auth = getAuth(firebase)
+  const firestore = getFirestore(firebase)
   useEffect(() => {
     auth.onAuthStateChanged(async(user)=>{
       // console.log(user.uid);

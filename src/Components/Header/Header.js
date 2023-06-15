@@ -54,7 +54,7 @@ function Header() {
           console.log(error);
         });
         }}>Logout</span>}
-        <div className="ml-2 sellMenu">
+        <div onClick={()=>{nav('/create')}} className="ml-2 sellMenu">
           <SellButton></SellButton>
           <div className="sellMenuContent">
             <SellButtonPlus></SellButtonPlus>

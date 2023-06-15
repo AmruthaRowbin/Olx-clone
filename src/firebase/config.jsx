@@ -1,7 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import {getAuth} from 'firebase/auth'
-import {getFirestore} from 'firebase/firestore'
-import {getStorage} from 'firebase/storage'
+
 
 const firebaseConfig = {
     apiKey: "AIzaSyAeVsyZVKyz83SVRcDHHdhrKMwaXZ1C_Vk",
@@ -13,8 +11,3 @@ const firebaseConfig = {
   };
   const firebase = initializeApp(firebaseConfig);
   export default firebase;
-  // eslint-disable-next-line no-unused-vars
-  const auth = getAuth(firebase)
-  // console.log(auth);
-  export const firestore=getFirestore(firebase)
-  export const firestorage=getStorage(firebase)
