@@ -2,10 +2,11 @@ import React, { Fragment, useContext, useState } from 'react';
 import './Create.css';
 import Header from '../Header/Header';
 import { AuthContext } from '../../store/Context';
-import { getStorage, ref, uploadBytes } from 'firebase/storage';
+import { getDownloadURL, getStorage, ref, uploadBytes } from 'firebase/storage';
 import firebase from '../../firebase/config';
+import { addDoc, collection, getFirestore } from 'firebase/firestore';
+import { useNavigate } from 'react-router-dom';
 
-// import { getStorage, ref, uploadBytes } from 'firebase/storage';
 
 const Create = () => {
   const { user } = useContext(AuthContext)
@@ -28,29 +29,35 @@ const Create = () => {
   };
 
   const firestorage=getStorage(firebase)
+  const firestore = getFirestore(firebase)
+  const nav = useNavigate()
+
   const handleSubmit = () => {
-
-  //   const fileName = image.name;
-    console.log(image);
-    const storageRef = ref(firestorage, `/images/${image.name}`)
-    // 'file' comes from the Blob or File API
-
-  const imageBlob = new Blob([image], {type:image.type});
-    uploadBytes(storageRef, imageBlob).then((snapshot) => {
-      console.log('Uploaded a blob or file!');
-    });
-    //   const fileName = image.name;
-    //   // const imageBlob = new Blob([image], {type: "image/jpeg"});
-    //   const imageRef = ref(firestorage, `/images/${fileName}`)
-    //   const fileContent = image
-    //   console.log(fileContent);
-    //   imageRef.putFile(new File(image.size,image.type,image.name))
-    // .then(snapshot => {
-    //   const downloadURL = snapshot.downloadURL;
-    //   console.log(downloadURL,'dddddown');
-    //   // Do something with the download URL
-    // });
-  
+    const date=new Date()
+    if(user){
+      const storageRef = ref(firestorage, `/images/${image.name}`)
+        // 'file' comes from the Blob or File API
+      const imageBlob = new Blob([image], {type:image.type});
+        uploadBytes(storageRef, imageBlob).then((snapshot) => {
+          getDownloadURL(ref(firestorage, `/images/${image.name}`))
+          .then(async(url) => {
+            console.log(url);
+            await addDoc(collection(firestore, "products"), {
+              productName: name,
+              category: category,
+              price: price,
+              image: url,
+              CreatedAt:date.toDateString(),
+              userId:user.id
+            });
+            console.log("User updated successfully!");
+            nav('/')
+          })
+    
+        });
+    }else{
+      console.log('please Login');
+    }
   }
 
   return (

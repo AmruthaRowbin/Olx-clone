@@ -8,7 +8,7 @@ import SellButton from '../../assets/SellButton';
 import SellButtonPlus from '../../assets/SellButtonPlus';
 import { AuthContext } from '../../store/Context';
 import { getAuth,signOut } from 'firebase/auth';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 function Header() {
   const {user,setUser}=useContext(AuthContext)
   const auth=getAuth()
@@ -43,7 +43,13 @@ function Header() {
           <Arrow></Arrow>
         </div>
         <div className="ml-2 loginPage">
-          <span>{user?`${user.name.toUpperCase()}`:'Login'}</span>
+        <span>
+      {user ? (
+        <span>{user.name.toUpperCase()}</span>
+      ) : (
+        <span onClick={()=>{nav('/login')}}>Login</span>
+      )}
+    </span>
           <hr />
         </div>
         {user && <span className='ml-2' onClick={()=>{

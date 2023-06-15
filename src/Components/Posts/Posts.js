@@ -1,10 +1,27 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Heart from '../../assets/Heart';
 import './Post.css';
+import firebase from '../../firebase/config';
+import {  collection, getDocs, getFirestore } from 'firebase/firestore';
 
 function Posts() {
+  const [products, setProducts] = useState([])
 
+  const firestore=getFirestore(firebase)
+
+  useEffect(() => {
+    const fetchedProducts = [];
+    getDocs(collection(firestore, "products")).then((querySnapshot)=>{
+      querySnapshot.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        console.log(doc.id, " => ", doc.data());
+        fetchedProducts.push(doc.data());
+      });
+      setProducts(fetchedProducts);
+    })
+  }, [])
+  console.log(products);
   return (
     <div className="postParentDiv">
       <div className="moreView">
@@ -13,6 +30,8 @@ function Posts() {
           <span>View more</span>
         </div>
         <div className="cards">
+
+          {/* //fdg */}
           <div
             className="card"
           >
@@ -31,6 +50,8 @@ function Posts() {
               <span>Tue May 04 2021</span>
             </div>
           </div>
+
+
         </div>
       </div>
       <div className="recommendations">
