@@ -8,7 +8,7 @@ import SellButton from '../../assets/SellButton';
 import SellButtonPlus from '../../assets/SellButtonPlus';
 import { AuthContext } from '../../store/Context';
 import { getAuth,signOut } from 'firebase/auth';
-import { Link, useNavigate } from 'react-router-dom';
+import {  useNavigate } from 'react-router-dom';
 function Header() {
   const {user,setUser}=useContext(AuthContext)
   const auth=getAuth()
@@ -19,8 +19,8 @@ function Header() {
   return (
     <div className="headerParentDiv">
       <div className="headerChildDiv">
-        <div className="brandName">
-          <OlxLogo></OlxLogo>
+        <div className="brandName" onClick={()=>{nav('/')}}>
+          <OlxLogo ></OlxLogo>
         </div>
         <div className="placeSearch">
           <Search></Search>
