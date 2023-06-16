@@ -4,12 +4,14 @@ import {Routes, Route} from 'react-router-dom'
 import Signup from './Components/Signup/Signup';
 import Login from './Components/Login/Login'
 import Create from './Components/Create/Create'
+import View from './Components/View/View'
 
 import Home from './Pages/Home';
 import firebase from './firebase/config';
 import { AuthContext } from './store/Context';
 import { getAuth } from 'firebase/auth';
 import { getDocs,collection,query,where, getFirestore } from 'firebase/firestore';
+import Post from './store/postContext';
 
 function App() {
   const {setUser} = useContext(AuthContext)
@@ -37,12 +39,15 @@ function App() {
   
   return (
     <div>
-      <Routes>
+      <Post>
+        <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/signup' element={<Signup />} />
         <Route path='/login' element={<Login />} />
         <Route path='/create' element={<Create />} />
+        <Route path='/view' element={<View />} />
       </Routes>
+      </Post>
     </div>
   );
 }

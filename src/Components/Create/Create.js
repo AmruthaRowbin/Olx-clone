@@ -36,7 +36,6 @@ const Create = () => {
     const date=new Date()
     if(user){
       const storageRef = ref(firestorage, `/images/${image.name}`)
-        // 'file' comes from the Blob or File API
       const imageBlob = new Blob([image], {type:image.type});
         uploadBytes(storageRef, imageBlob).then((snapshot) => {
           getDownloadURL(ref(firestorage, `/images/${image.name}`))
