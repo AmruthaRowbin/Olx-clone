@@ -8,7 +8,7 @@ import { addDoc, collection, getFirestore } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
 
 
-const Create = () => {
+const   Create = () => {
   const { user } = useContext(AuthContext)
   const [name, setName] = useState('')
   const [category, setCategory] = useState('')
@@ -95,17 +95,17 @@ const Create = () => {
             onChange={(e) => setPrice(e.target.value)}
           />
           <br />
-          {/* </form> */}
+       
           <br />
           <img alt="Posts" width="200px" height="200px" src={imageDataUrl ? imageDataUrl : ''}></img>
-          {/* <form> */}
+        
           <br />
           <input onChange={handleImageChange} type="file" />
           <br />
           <button
             onClick={handleSubmit}
             className="uploadBtn">upload and Submit</button>
-          {/* </form> */}
+       
         </div>
       </card>
     </Fragment>
