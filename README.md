@@ -22,10 +22,4 @@ Getting Started => https://react-olx-clone-firebase.vercel.app
     Firebase: Backend-as-a-Service platform for user authentication, database, storage, and hosting
 
 
-## To run the project locally, follow these steps:
 
-    Clone the repository: git clone https://github.com/nishad7447/react_OLX-clone_firebase.git
-    Install dependencies: npm install
-    Set up Firebase project and configure Firebase credentials
-    Start the development server: npm start
-    Open your browser and visit http://localhost:3000 to see the application.
